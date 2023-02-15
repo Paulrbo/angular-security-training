@@ -24,6 +24,10 @@ import org.springframework.security.data.repository.query.SecurityEvaluationCont
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 
+
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
@@ -83,6 +87,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable() // <== for tests!! //TODO remove it
                 //.csrfTokenRepository(....)
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                //
                 .headers()
                 .frameOptions()
                 .disable()
